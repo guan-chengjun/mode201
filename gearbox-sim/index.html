@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>二级圆柱齿轮减速器 · 3D 原理仿真</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #14171b;
+    font-family: "Microsoft YaHei", "PingFang SC", system-ui, sans-serif; }
+  canvas { display: block; }
+
+  /* 控制面板：只保留必要按钮 */
+  #ui {
+    position: fixed; top: 16px; left: 16px; z-index: 10;
+    background: rgba(20, 24, 30, 0.82); backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.08); border-radius: 10px;
+    padding: 14px 16px; color: #d7dce2; width: 240px;
+  }
+  #ui h1 { font-size: 14px; font-weight: 600; color: #f0f3f6; margin-bottom: 10px; }
+  .row { display: flex; gap: 8px; margin-bottom: 12px; }
+  button {
+    flex: 1; padding: 6px 0; font-size: 13px; color: #e8ecf0;
+    background: #2a313b; border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px; cursor: pointer; transition: background 0.15s;
+  }
+  button:hover { background: #37404d; }
+  button.active { background: #2f5d8a; border-color: #4a7fb5; }
+  label { font-size: 12px; color: #9aa4af; display: block; margin-bottom: 4px; }
+  label span { color: #f0f3f6; font-weight: 600; }
+  input[type=range] { width: 100%; accent-color: #4a7fb5; margin-bottom: 10px; }
+  #info { font-size: 12px; color: #8a94a0; line-height: 1.7; }
+  #info b { color: #d7dce2; font-weight: 600; }
+
+  #tip {
+    position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%);
+    font-size: 12px; color: rgba(255,255,255,0.35); z-index: 10; pointer-events: none;
+  }
+</style>
+<script type="importmap">
+{ "imports": { "three": "./vendor/three.module.js" } }
+</script>
+</head>
+<body>
+
+<div id="ui">
+  <h1>二级圆柱齿轮减速器</h1>
+  <div class="row">
+    <button id="btnToggle">暂停</button>
+    <button id="btnReset">重置</button>
+    <button id="btnFlow">动力流</button>
+  </div>
+  <label>输入转速 <span id="rpmVal">60</span> rpm</label>
+  <input type="range" id="rpm" min="10" max="150" step="1" value="60">
+  <div id="info">
+    传动比 <b>1 : 9</b>（3 × 3）<br>
+    输出转速 <b id="outRpm">6.7</b> rpm
+  </div>
+</div>
+<div id="tip">左键拖拽旋转 · 滚轮缩放 · 右键平移</div>
+
+<script type="module" src="./main.js"></script>
+</body>
+</html>
